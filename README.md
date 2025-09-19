@@ -1,16 +1,20 @@
-⚽ Football League PWA (Next.js 15)
+# ⚽ Football League PWA (Next.js 15)
 
-A Progressive Web App (PWA) built with Next.js 15 and next-pwa
-.
-This project supports offline caching, installation to mobile/desktop, and a custom app manifest.
+A **Progressive Web App (PWA)** built with Next.js 15 and [next-pwa](https://github.com/shadowwalker/next-pwa).  
+Supports **offline caching**, **installation to mobile/desktop**, and a **custom app manifest**.
 
-🚀 Getting Started
-1. Install dependencies
+🔗 **Live Demo:** [football-league-pwa.vercel.app](https://football-league-pwa.vercel.app/)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
 npm install next-pwa
 # or
 yarn add next-pwa
 
-2. Configure next.config.ts
+### 2. Configure next.config.ts
 import withPWA from "next-pwa";
 import type { NextConfig } from "next";
 
@@ -27,10 +31,7 @@ const nextConfig: NextConfig = {
 
 export default withPwa(nextConfig);
 
-3. Add TypeScript support
-
-Since next-pwa has no built-in types, create a custom declaration file:
-
+### 3. Add TypeScript support
 types/next-pwa.d.ts
 
 declare module "next-pwa" {
@@ -50,9 +51,7 @@ declare module "next-pwa" {
   ): (config: NextConfig) => NextConfig;
 }
 
-
 Update tsconfig.json:
-
 "include": [
   "next-env.d.ts",
   "**/*.ts",
@@ -61,12 +60,8 @@ Update tsconfig.json:
   "types/**/*.d.ts"
 ]
 
-4. Create manifest.json
 
-Generate a manifest here: Web Manifest Generator
-
-Save it to public/manifest.json. Example:
-
+### 4. Create manifest.webmanifest
 {
   "name": "Football League PWA",
   "short_name": "FootballLeague",
@@ -89,24 +84,18 @@ Save it to public/manifest.json. Example:
   ]
 }
 
-5. Add icons
-
-Put icons in public/icons/:
-
+### 5. Add icons
 public/
  ├── manifest.json
  └── icons/
      ├── icon-192x192.png
      └── icon-512x512.png
 
-6. Configure metadata in app/layout.tsx
-import type { Metadata } from "next";
-import "./globals.css";
-
+### 6. Configure metadata in app/layout.tsx
 export const metadata: Metadata = {
   title: "Football League PWA",
   description: "A Next.js 15 Progressive Web App for football fans",
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   themeColor: "#0d47a1",
   icons: {
     icon: [
@@ -117,22 +106,5 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
-
-7. Run locally
+### 7. Run locally
 npm run dev
-
-
-Open http://localhost:3000
- in Chrome.
-Check Lighthouse → PWA audit. You should see the “Install App” option.
